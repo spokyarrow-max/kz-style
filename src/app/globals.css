@@ -1,26 +1,85 @@
 @import "tailwindcss";
 
+/*
+  KZ STYLE — tożsamość wizualna: "Beton i Sygnał"
+  Świadomie JEDEN, stały wygląd marki (nie zależy od trybu jasny/ciemny
+  systemu) — tak jak większość marek modowych ma swój niezmienny charakter.
+*/
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --stone-950: #17140f;
+  --stone-900: #211d17;
+  --stone-800: #2c2620;
+  --stone-700: #4a443b;
+  --stone-400: #8f887c;
+  --stone-200: #d8d2c6;
+  --stone-100: #ece8e0;
+
+  --signal: #ff5a1f;
+  --signal-deep: #d94413;
+  --signal-ink: #1a0d04;
+
+  --font-display: var(--font-big-shoulders);
+  --font-body: var(--font-archivo);
+  --font-tag: var(--font-plex-mono);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-stone-950: var(--stone-950);
+  --color-stone-900: var(--stone-900);
+  --color-stone-800: var(--stone-800);
+  --color-stone-700: var(--stone-700);
+  --color-stone-400: var(--stone-400);
+  --color-stone-200: var(--stone-200);
+  --color-stone-100: var(--stone-100);
+
+  --color-signal: var(--signal);
+  --color-signal-deep: var(--signal-deep);
+  --color-signal-ink: var(--signal-ink);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-tag);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--stone-950);
+  color: var(--stone-100);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* Wąski, ukośny pasek "ostrzegawczy" — nawiązanie do taśmy budowlanej.
+   Używany oszczędnie, jako akcent, nie tło całej strony. */
+.hazard-stripe {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--signal),
+    var(--signal) 10px,
+    var(--stone-950) 10px,
+    var(--stone-950) 20px
+  );
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 22s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }

@@ -1,0 +1,44 @@
+JAK URUCHOMIĆ SKLEP NA SWOIM KOMPUTERZE
+=====================================================================
+
+Sklep NIE działa sam z siebie — to nie jest strona wystawiona gdzieś
+w internecie (jeszcze), tylko projekt, który trzeba "uruchomić" lokalnie
+na Twoim komputerze, żeby go zobaczyć w przeglądarce.
+
+KROK PO KROKU:
+
+1. Otwórz Terminal.
+
+2. Wejdź do folderu projektu (wklej i naciśnij Enter):
+
+   cd ~/Desktop/KZ
+
+3. Uruchom sklep (wklej i naciśnij Enter):
+
+   npm run dev
+
+4. Poczekaj, aż zobaczysz coś w stylu:
+
+   ▲ Next.js 16.3.4
+   - Local: http://localhost:3000
+   ✓ Ready
+
+5. Otwórz przeglądarkę i wejdź na:
+
+   http://localhost:3000
+
+   To jest Twój sklep — działający lokalnie, tylko na Twoim komputerze.
+   Nikt inny (poza kimś w tej samej sieci Wi-Fi, jeśli specjalnie
+   udostępnisz) go teraz nie widzi.
+
+6. Żeby ZATRZYMAĆ sklep — wróć do okna Terminala, w którym go
+   uruchomiłeś/aś, i naciśnij Ctrl+C.
+
+WAŻNE:
+- Musisz zostawić to okno Terminala otwarte, dopóki chcesz, żeby sklep
+  działał. Zamknięcie okna = wyłączenie sklepu.
+- Jeśli coś zmienisz w kodzie (albo ja coś zmienię), NIE musisz
+  restartować — sklep sam się odświeży w przeglądarce.
+- Jeśli spróbujesz uruchomić `npm run dev` drugi raz w nowym oknie,
+  a poprzednie wciąż działa, możesz dostać błąd, że port 3000 jest
+  zajęty. To normalne — po prostu zamknij jedno z okien.

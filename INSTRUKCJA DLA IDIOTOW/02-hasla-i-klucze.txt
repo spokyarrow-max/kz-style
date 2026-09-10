@@ -1,0 +1,76 @@
+HASŁA I KLUCZE — PLIK .env.local
+=====================================================================
+
+CO TO JEST
+---------------------------------------------------------------------
+W folderze projektu (~/Desktop/KZ) jest plik o nazwie ".env.local".
+To zwykły plik tekstowy, w którym trzymamy wszystkie "sekrety" — klucze
+łączące nasz sklep z bazą danych Supabase i (w przyszłości) z systemem
+płatności Stripe.
+
+Nazwa zaczyna się od kropki, więc może być niewidoczna w Finderze —
+to celowe, macOS chowa takie pliki domyślnie. Żeby go zobaczyć w
+Finderze, naciśnij jednocześnie: Cmd + Shift + Kropka (.)
+
+DLACZEGO TO WAŻNE
+---------------------------------------------------------------------
+Ten plik NIGDY nie trafia do internetu, na GitHuba, ani do nikogo innego.
+Gdyby ktoś obcy poznał te klucze (szczególnie "SUPABASE_SECRET_KEY"),
+mógłby dostać się do CAŁEJ bazy danych — zobaczyć wszystkich klientów,
+zamówienia, wszystko, z pominięciem wszelkich zabezpieczeń.
+
+Ja sam już zadbałem o to, żeby ten plik był na "czarnej liście" (plik
+.gitignore) — czyli nawet gdybyśmy kiedyś wrzucili ten projekt na
+GitHuba, ten konkretny plik zostanie pominięty automatycznie.
+
+ZASADA: nigdy nie wklejaj zawartości tego pliku nigdzie poza tą naszą
+rozmową (a i to tylko wtedy, gdy ja bezpośrednio o to proszę, żeby coś
+skonfigurować).
+
+CO JEST W ŚRODKU (skrócone wyjaśnienie każdej linijki)
+---------------------------------------------------------------------
+NEXT_PUBLIC_SUPABASE_URL
+    Adres internetowy Twojej bazy danych. Bezpieczny, jawny.
+
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+    "Klucz publiczny" — bezpieczny nawet w przeglądarce klienta.
+
+SUPABASE_SECRET_KEY
+    "Klucz-wytrych" — pełny dostęp do wszystkiego, omija wszelkie
+    zabezpieczenia. TYLKO dla serwera, nigdy nie pokazuje się klientowi.
+
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+    "Klucz publiczny" Stripe — bezpieczny w przeglądarce, uruchamia
+    formularz płatności.
+
+STRIPE_SECRET_KEY
+    Klucz-wytrych do Stripe (tworzenie płatności, sprawdzanie ich
+    statusu). TYLKO dla serwera, nigdy nie pokazuje się klientowi.
+
+STRIPE_WEBHOOK_SECRET
+    "Pieczątka", którą Stripe podpisuje każde powiadomienie o statusie
+    płatności — dzięki niej wiemy, że powiadomienie NAPRAWDĘ przyszło
+    od Stripe, a nie od kogoś podszywającego się. Do pracy lokalnej ten
+    klucz pochodzi z komendy `stripe listen` (patrz plik 04) i zmieni
+    się, jeśli kiedyś uruchomisz tę komendę na innym komputerze.
+
+NEXT_PUBLIC_SITE_URL
+    Adres strony podczas pracy lokalnej: http://localhost:3000
+
+CO ZROBIĆ, JEŚLI ZGUBISZ TE KLUCZE
+---------------------------------------------------------------------
+Nic straconego — zawsze możesz je odzyskać:
+1. Wejdź na supabase.com i zaloguj się.
+2. Wybierz projekt "KZ styles".
+3. Settings → API Keys — tam są "Publishable key" i "Secret key".
+4. Project URL znajdziesz w Settings → General.
+
+Klucze Stripe znajdziesz podobnie: dashboard.stripe.com → upewnij się,
+że jesteś w "Sandbox"/"Test mode" (lewy górny róg) → Developers →
+API keys. Webhook secret trzeba wygenerować na nowo komendą
+`stripe listen --forward-to localhost:3000/api/webhooks/stripe`
+(pokaże go w terminalu przy starcie).
+
+Hasło do samej BAZY DANYCH (to, które generowałeś/aś przy zakładaniu
+projektu) to zupełnie inna rzecz — nie jest nam na razie do niczego
+potrzebne w kodzie, więc nie musisz się nim martwić.

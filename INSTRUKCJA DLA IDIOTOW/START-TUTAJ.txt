@@ -1,0 +1,41 @@
+START TUTAJ — CO TO JEST TEN FOLDER
+=====================================================================
+
+To Twoja "ściąga" do projektu KZ Style. Nie jest to część samego sklepu
+(ani sam sklep, ani jego strony, o ten folder nie zahaczają) — to osobna
+notatka DLA CIEBIE, żebyś nie musiał/a pamiętać wszystkiego w głowie ani
+przewijać całej rozmowy w górę za każdym razem, gdy czegoś zapomnisz.
+
+Będę ten folder uzupełniał w miarę jak dochodzimy do kolejnych etapów
+projektu — traktuj go jak żywy dokument, nie jednorazową notatkę.
+
+CO ZNAJDZIESZ W ŚRODKU (w tej kolejności warto czytać za pierwszym razem):
+
+  01-jak-uruchomic-sklep.txt
+      Jak w ogóle odpalić stronę na swoim komputerze i ją zobaczyć.
+
+  02-hasla-i-klucze.txt
+      Czym jest plik .env.local, co w nim jest i dlaczego nie wolno
+      go nikomu wysyłać ani wrzucać do internetu.
+
+  03-supabase-wazne-rzeczy.txt
+      Rzeczy, które prędzej czy później będziesz chciał/a zmienić
+      w panelu Supabase (np. wyłączenie potwierdzania e-maila,
+      nadanie sobie roli administratora).
+
+  04-jak-testowac.txt
+      Lista rzeczy do ręcznego sprawdzenia, żeby upewnić się, że nic
+      się nie zepsuło — rośnie wraz z kolejnymi etapami projektu.
+
+  05-slowniczek-pojec.txt
+      Wyjaśnienie trudniejszych słów, które się przewijają w naszych
+      rozmowach (np. co to jest RLS, Server Action, migracja).
+
+  06-status-projektu.txt
+      Krótkie podsumowanie: co już działa naprawdę, a co jeszcze nie.
+      To uproszczona wersja pełnego planu, który trzymam u siebie —
+      jeśli chcesz pełny, szczegółowy stan, zawsze możesz mnie zapytać
+      "jaki jest aktualny status projektu".
+
+Jeśli czegoś tu zabraknie albo coś będzie niejasne — powiedz mi,
+dopiszę i doprecyzuję.

@@ -1,0 +1,72 @@
+STATUS PROJEKTU KZ STYLE — CO JUŻ DZIAŁA
+=====================================================================
+(Ostatnia aktualizacja: po Etapie 11 — CAŁY PLAN UKOŃCZONY. Ten plik może się z czasem
+zdezaktualizować — jeśli chcesz mieć pewność, zapytaj mnie po prostu
+"jaki jest aktualny status projektu".)
+
+DZIAŁA NAPRAWDĘ (nie tylko wygląda, sprawdzone w praktyce):
+---------------------------------------------------------------------
+✅ Baza danych — wszystkie potrzebne "arkusze" (produkty, konta,
+   zamówienia, koszyki, itd.) z zamkami na drzwiach (RLS)
+✅ Wygląd marki — własna tożsamość wizualna "Beton i Sygnał"
+   (szary beton + pomarańcz), nie szablon
+✅ Katalog 12 przykładowych produktów z prawdziwymi wariantami
+   (kolor/rozmiar/stan magazynowy)
+✅ Wyszukiwarka, filtry (cena/rozmiar/kolor/dostępność), sortowanie
+✅ Koszyk — trwały, przetrwa odświeżenie strony, pilnuje stanów
+   magazynowych
+✅ Konta klientów — rejestracja, logowanie, panel "Moje konto"
+   (dane, adresy, ulubione, historia zamówień), scalanie koszyka
+   gościa z kontem po zalogowaniu
+✅ Checkout — 4 kroki (dane → adres i dostawa → podsumowanie →
+   płatność), dla gościa i dla zalogowanego, z prawdziwie liczonymi
+   kodami rabatowymi (FIRST10, KZ20) i kosztem dostawy
+✅ PRAWDZIWE PŁATNOŚCI (Stripe, tryb testowy) — karta testowa,
+   automatycznie wykryty BLIK, prawdziwe tworzenie zamówienia
+   i odejmowanie stanu magazynowego DOPIERO po potwierdzeniu płatności
+   przez Stripe (nigdy na słowo od przeglądarki)
+✅ PANEL ADMINISTRATORA (/admin) — zarządzanie produktami (w tym stanem
+   magazynowym), zamówieniami (zmiana statusu), kodami rabatowymi
+   i klientami. Dostępny tylko dla konta z rolą "admin".
+✅ PODSTAWY SEO — każda strona ma własny, sensowny tytuł w Google/karcie
+   przeglądarki, mapa strony (sitemap.xml) i plik robots.txt, ładny
+   podgląd przy wklejeniu linku na Discordzie/WhatsAppie/social media
+✅ Strony informacyjne z prawdziwą treścią: O nas, Kontakt, Dostawa,
+   Zwroty i reklamacje, FAQ, Regulamin, Polityka prywatności, Polityka
+   cookies
+
+✅ PRZEGLĄD BEZPIECZEŃSTWA — sprawdzone naprawdę (nie tylko czytanie
+   kodu), znaleziona i naprawiona jedna prawdziwa luka (funkcje płatności
+   dało się wywołać bezpośrednio z przeglądarki — teraz zablokowane),
+   dodana solidniejsza walidacja danych w checkoucie i panelu admina
+
+✅ SPRAWDZONE NA TELEFONIE I TABLECIE — znalezione i naprawione dwa
+   realne błędy (brak linku do panelu admina na telefonie, rozjeżdżająca
+   się tabela na tablecie). Sprawdzona też "odrzucona płatność" —
+   klient dostaje czytelny komunikat i może od razu spróbować ponownie.
+
+JESZCZE NIE ISTNIEJE (świadomie, poza zakresem tego projektu):
+---------------------------------------------------------------------
+❌ Prawdziwe zdjęcia produktów — na razie placeholder z napisem "KZ"
+❌ Tworzenie zupełnie nowych produktów z uploadem zdjęć w panelu admina
+   (edycja istniejących — tak, działa)
+
+UWAGA — PROJEKT NIGDY NIE BYŁ ZACOMMITOWANY DO GIT
+---------------------------------------------------------------------
+Cała praca od Etapu 1 do teraz istnieje TYLKO na Twoim dysku — nie ma
+żadnej historii zmian ani kopii zapasowej w git (poza pierwszym,
+automatycznym commitem z założenia projektu). Jeśli coś się stanie
+z tym folderem, stracisz wszystko. Warto to niedługo zacommitować —
+zapytaj mnie, jak dojdziemy do końca, albo w dowolnym momencie
+powiedz "zróbmy commit", to Cię przez to przeprowadzę.
+
+JAK TERAZ DZIAŁA PŁATNOŚĆ (W SKRÓCIE)
+---------------------------------------------------------------------
+Klient wpisuje dane karty testowej u Stripe (nigdy u nas). Stripe
+sam potwierdza nam (dwoma niezależnymi sposobami — "webhookiem" i
+dodatkowym sprawdzeniem po powrocie), że pieniądze testowe faktycznie
+"przeszły" — i DOPIERO wtedy w bazie powstaje prawdziwe zamówienie ze
+statusem "Opłacone", a stan magazynowy się zmniejsza. Do testowania
+lokalnego potrzebne jest uruchomione `stripe listen` w terminalu (patrz
+plik 04-jak-testowac.txt) — bez tego webhook nie dotrze na Twój
+komputer.

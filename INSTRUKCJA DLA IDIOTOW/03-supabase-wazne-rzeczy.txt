@@ -1,0 +1,68 @@
+WAŻNE RZECZY W PANELU SUPABASE
+=====================================================================
+
+Supabase to nasza baza danych w internecie (patrz: slowniczek). Poniżej
+kilka rzeczy, które warto wiedzieć, jak tam wejść i co przełączyć.
+
+Panel: wejdź na supabase.com, zaloguj się, wybierz projekt "KZ styles".
+
+---------------------------------------------------------------------
+1. POTWIERDZANIE E-MAILA PRZY REJESTRACJI
+---------------------------------------------------------------------
+Teraz jest tak: gdy ktoś się rejestruje w sklepie, dostaje e-mail
+z linkiem potwierdzającym i dopiero po jego kliknięciu może się
+zalogować. To dobre zabezpieczenie na "prawdziwym" sklepie (nie da się
+założyć konta na cudzy, nieistniejący e-mail).
+
+Jest to jednak niewygodne, kiedy Ty albo ktoś inny testuje sklep i chce
+się od razu zalogować bez sprawdzania skrzynki.
+
+JEŚLI CHCESZ TO WYŁĄCZYĆ (na czas testów/pokazywania projektu):
+  1. W panelu Supabase: Authentication (ikona w lewym pasku)
+  2. Providers → Email
+  3. Wyłącz przełącznik "Confirm email"
+  4. Zapisz
+
+Pamiętaj, żeby włączyć to z powrotem, zanim sklep trafi do prawdziwych
+klientów — inaczej ktokolwiek mógłby zakładać konta na cudze adresy
+e-mail.
+
+---------------------------------------------------------------------
+2. JAK NADAĆ SOBIE (ALBO KOMUŚ) ROLĘ ADMINISTRATORA
+---------------------------------------------------------------------
+Panel administratora sklepu (/admin) będziemy budować w jednym
+z kolejnych etapów. Będzie on dostępny WYŁĄCZNIE dla konta z rolą
+"admin" w bazie — zwykli klienci mają rolę "customer" i nie mają tam
+wstępu, nawet gdyby ręcznie wpisali adres w przeglądarce.
+
+Żeby nadać komuś rolę administratora:
+  1. W panelu Supabase: Table Editor (ikona tabeli w lewym pasku)
+  2. Wybierz tabelę "profiles"
+  3. Znajdź wiersz z odpowiednim adresem/kontem (kolumna widoczna to
+     imię/nazwisko — id konta znajdziesz w Authentication → Users)
+  4. Kliknij w komórkę "role" tego wiersza
+  5. Zmień wartość z "customer" na "admin"
+  6. Zapisz (Enter albo kliknięcie poza komórką)
+
+Poproszę Cię o zrobienie tego, gdy dojdziemy do budowania panelu admina.
+
+---------------------------------------------------------------------
+3. JAK PODEJRZEĆ DANE "NA ŻYWO" (bez pytania mnie)
+---------------------------------------------------------------------
+Jeśli chcesz sam/a zobaczyć np. jakich mamy klientów, jakie produkty,
+zamówienia:
+  1. Panel Supabase → Table Editor
+  2. Po lewej lista wszystkich "arkuszy" (tabel) — kliknij dowolny
+  3. Zobaczysz zawartość jak w Excelu
+
+To bezpieczne — samo OGLĄDANIE tam niczego nie zepsuje. Uważaj tylko
+z RĘCZNYM edytowaniem/usuwaniem wierszy, jeśli nie masz pewności, co
+robisz — lepiej zapytać mnie najpierw.
+
+---------------------------------------------------------------------
+4. SQL EDITOR — DO CZEGO SŁUŻY
+---------------------------------------------------------------------
+To miejsce (ikona ">_" w lewym pasku), gdzie kilka razy wklejaliśmy
+gotowy kod, żeby stworzyć tabele czy dodać przykładowe produkty.
+Będziemy z niego korzystać przy każdej większej zmianie w strukturze
+bazy danych — zawsze dam Ci gotowy tekst do wklejenia z jasną instrukcją.

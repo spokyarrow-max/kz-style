@@ -1,0 +1,87 @@
+SŁOWNICZEK POJĘĆ
+=====================================================================
+Wyjaśnienia "po ludzku" słów, które pojawiają się w naszych rozmowach.
+
+BAZA DANYCH
+    Miejsce, gdzie na stałe przechowywane są informacje — produkty,
+    konta klientów, zamówienia. Jak wielki, uporządkowany Excel
+    w internecie, dostępny 24/7. U nas: Supabase.
+
+SUPABASE
+    Firma/usługa, która daje nam gotową bazę danych, system logowania
+    (konta klientów) i miejsce na pliki (zdjęcia) — bez tego musielibyśmy
+    sami budować i utrzymywać własny serwer od zera.
+
+TABELA
+    Jeden "arkusz" w bazie danych — np. tabela "products" (produkty)
+    ma kolumny: nazwa, cena, opis, i wiersz dla każdego produktu.
+
+RLS (Row Level Security) — "zamki na drzwiach"
+    Reguły w bazie danych, które pilnują, KTO może zobaczyć/zmienić
+    KTÓRY wiersz danych. Np. dzięki RLS klient A fizycznie nie może
+    zobaczyć zamówień klienta B, nawet gdyby spróbował to obejść.
+
+MIGRACJA
+    Plik z instrukcjami, które "budują" albo zmieniają strukturę bazy
+    danych (np. tworzą nową tabelę). Wklejaliśmy je razem do SQL Editor
+    w Supabase.
+
+KLUCZ API (API key)
+    Rodzaj hasła, którym nasz sklep "przedstawia się" bazie danych,
+    żeby ta wiedziała, że to zaufane połączenie. Mamy dwa rodzaje:
+    publiczny (bezpieczny w przeglądarce) i sekretny (tylko dla serwera).
+
+SERWER / PO STRONIE SERWERA
+    Kod, który wykonuje się "za kulisami", na komputerze obsługującym
+    stronę — nie w przeglądarce klienta. Ważne, bo klient (nawet
+    nieuczciwy) nie ma jak podejrzeć ani zmienić tego kodu.
+
+KLIENT / PRZEGLĄDARKA
+    To, co dzieje się bezpośrednio w przeglądarce użytkownika — widoczne,
+    i teoretycznie możliwe do "podejrzenia" czy zmanipulowania przez
+    kogoś, kto by się uparł. Dlatego ważne rzeczy (np. sprawdzanie stanu
+    magazynowego) zawsze robimy PO STRONIE SERWERA, nigdy tylko w
+    przeglądarce.
+
+NEXT.JS
+    Narzędzie (framework) w którym budujemy cały sklep — odpowiada
+    za to, jak strony są wyświetlane, jak się między sobą łączą, i jak
+    kod "rozmawia" z bazą danych.
+
+SERVER ACTION
+    Funkcja, którą przycisk w przeglądarce może wywołać, a która
+    faktycznie wykonuje się bezpiecznie na serwerze (np. "dodaj do
+    koszyka", "zaloguj się"). Klient nie widzi, jak ona działa w środku.
+
+PROXY (dawniej "middleware")
+    Strażnik sprawdzany przy KAŻDYM wejściu na stronę — u nas pilnuje,
+    żeby nikt niezalogowany nie wszedł na /konto ani /admin.
+
+SESJA / ZALOGOWANIE
+    Informacja (zapisana bezpiecznie w ciasteczku przeglądarki) o tym,
+    że dany użytkownik jest zalogowany, i jako kto.
+
+CIASTECZKO (cookie)
+    Mały kawałek informacji, który strona zapisuje w przeglądarce
+    użytkownika, żeby "pamiętać" go między wejściami na stronę — np.
+    kto jest zalogowany, albo który koszyk gościa jest jego.
+
+KOSZYK GOŚCIA
+    Koszyk osoby, która NIE jest zalogowana. Rozpoznajemy ją po
+    bezpiecznym ciasteczku, nie po koncie. Gdy taka osoba się zaloguje,
+    jej koszyk "przepina się" na konto (tzw. scalanie).
+
+STAN MAGAZYNOWY
+    Ile sztuk danego wariantu produktu (np. bluza, kolor czarny,
+    rozmiar M) faktycznie zostało na "magazynie". Sklep pilnuje, żeby
+    nie dało się kupić więcej, niż faktycznie jest dostępne.
+
+BUILD
+    Proces "składania" całego projektu w gotową, sprawdzoną wersję —
+    m.in. sprawdza, czy nigdzie nie ma błędów w kodzie, zanim cokolwiek
+    trafi na prawdziwy serwer.
+
+WARIANT PRODUKTU
+    Konkretna kombinacja koloru i rozmiaru danego produktu (np. "Bluza
+    Riot, kolor czarny, rozmiar M") — każdy wariant ma swój własny stan
+    magazynowy.

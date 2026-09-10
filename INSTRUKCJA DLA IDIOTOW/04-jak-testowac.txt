@@ -1,0 +1,136 @@
+JAK RĘCZNIE PRZETESTOWAĆ SKLEP
+=====================================================================
+
+To lista rzeczy do sprawdzenia w przeglądarce, żeby na własne oczy
+zobaczyć, że dana funkcja działa. Nie musisz robić tego wszystkiego za
+każdym razem — ja też testuję po swojej stronie po każdej zmianie.
+Przyda się to bardziej, jeśli sam/a chcesz się upewnić, że coś działa,
+albo pokazać komuś sklep i wiedzieć, co mu zademonstrować.
+
+Zanim zaczniesz: uruchom sklep (patrz plik 01) i wejdź na
+http://localhost:3000
+
+---------------------------------------------------------------------
+KATALOG PRODUKTÓW (Etap 3)
+---------------------------------------------------------------------
+[ ] Strona główna pokazuje sekcję "Najnowsze" z prawdziwymi produktami
+[ ] Kliknięcie produktu otwiera jego stronę ze zdjęciem-placeholderem,
+    ceną, opisem
+[ ] Na stronie produktu można wybrać kolor i rozmiar
+[ ] Wybranie rozmiaru, którego nie ma na stanie — jest wyszarzony,
+    nie da się go kliknąć
+[ ] Menu "Mężczyźni" / "Kobiety" / "Biżuteria" pokazuje różne produkty
+[ ] Wyszukiwarka (ikona/link "Szukaj") — wpisanie np. "hoodie" pokazuje
+    tylko pasujące produkty
+[ ] Przycisk "Filtry" na stronie kategorii — wybranie rozmiaru lub
+    koloru zawęża listę produktów
+
+---------------------------------------------------------------------
+KOSZYK (Etap 4)
+---------------------------------------------------------------------
+[ ] Na stronie produktu: wybierz wariant, kliknij "Dodaj do koszyka" —
+    pojawia się napis "Dodano do koszyka"
+[ ] Liczba przy "Koszyk" w prawym górnym rogu rośnie
+[ ] Wejście w "Koszyk" pokazuje dodany produkt
+[ ] Można zwiększyć/zmniejszyć ilość przyciskami "+"/"−"
+[ ] Można usunąć produkt z koszyka
+[ ] PO ODŚWIEŻENIU STRONY (klawisz F5) koszyk nadal ma te same produkty
+    — to najważniejszy test, bo pokazuje, że koszyk jest "prawdziwy",
+    a nie tylko chwilowo wyświetlony
+
+---------------------------------------------------------------------
+KONTA KLIENTÓW (Etap 5)
+---------------------------------------------------------------------
+[ ] Wejście na /konto BEZ zalogowania przekierowuje na stronę logowania
+[ ] Rejestracja nowego konta (imię, nazwisko, e-mail, hasło min. 8
+    znaków) — jeśli Twój projekt Supabase wymaga potwierdzenia e-maila
+    (patrz plik 03), dostaniesz komunikat "Sprawdź skrzynkę e-mail"
+[ ] Logowanie istniejącym kontem przenosi do panelu "Moje konto"
+[ ] W prawym górnym rogu strony pojawia się Twoje imię zamiast
+    "Zaloguj"
+[ ] W "Moje konto" → "Moje dane" można zmienić imię/nazwisko i zapisać
+[ ] W "Moje konto" → "Adresy dostawy" można dodać nowy adres i go
+    usunąć
+[ ] Kliknięcie serduszka przy produkcie (na liście albo na stronie
+    produktu) dodaje go do "Moje konto" → "Ulubione"
+[ ] "Wyloguj" (obok imienia w nagłówku) wylogowuje i z powrotem
+    pokazuje "Zaloguj"
+[ ] TEST SCALANIA KOSZYKA: będąc WYLOGOWANYM, dodaj coś do koszyka,
+    potem się zaloguj — produkt powinien zostać w koszyku (koszyk
+    "gościa" łączy się z kontem)
+
+---------------------------------------------------------------------
+CHECKOUT I KODY RABATOWE (Etap 6)
+---------------------------------------------------------------------
+[ ] Mając coś w koszyku, kliknij "Przejdź do kasy" — trafiasz na
+    Krok 1 (dane kontaktowe)
+[ ] Próba wejścia na /checkout albo /checkout/dostawa z PUSTYM koszykiem
+    (np. wpisując adres ręcznie) przekierowuje z powrotem do koszyka
+[ ] Krok 1: podaj e-mail, "Dalej" przenosi do Kroku 2
+[ ] Krok 2: uzupełnij adres i wybierz metodę dostawy, "Dalej" przenosi
+    do Kroku 3 (Podsumowanie)
+[ ] W Podsumowaniu widać wszystkie dane, produkty i poprawnie policzoną
+    sumę (produkty + dostawa)
+[ ] Kliknięcie "Zmień" przy adresie wraca do Kroku 2 z WCZEŚNIEJ
+    WPISANYM adresem (nie pustym formularzem)
+[ ] Wpisanie kodu "FIRST10" w Podsumowaniu daje 10% rabatu i poprawnie
+    przelicza sumę
+[ ] Wpisanie nieistniejącego kodu pokazuje "Nieprawidłowy kod rabatowy"
+[ ] "Usuń" przy zastosowanym kodzie cofa rabat
+[ ] Kliknięcie "Przejdź do płatności" przenosi do Kroku 4 (Płatność)
+
+---------------------------------------------------------------------
+PŁATNOŚĆ (Etap 7) — WAŻNE: NAJPIERW URUCHOM `stripe listen`
+---------------------------------------------------------------------
+Zanim zaczniesz testować płatność, w terminalu musi działać:
+
+    stripe listen --forward-to localhost:3000/api/webhooks/stripe
+
+(zostaw to okno otwarte przez cały czas testowania — bez niego Stripe
+nie ma jak nas powiadomić, że płatność się udała, i zamówienie nigdy
+nie zmieni statusu na "Opłacone")
+
+[ ] Na stronie płatności widać podsumowanie z tą samą kwotą co w kroku 3
+[ ] Wybranie "Karta" pokazuje pola: numer karty, data ważności, CVC
+[ ] Wpisanie karty testowej 4242 4242 4242 4242, dowolnej przyszłej
+    daty (np. 12/30) i dowolnego CVC (np. 123) — pola stają się zielone
+[ ] Kliknięcie "Zapłać" przenosi na stronę "Dziękujemy za zamówienie!"
+    z numerem w formacie KZ-2026-00001
+[ ] Numer zamówienia, produkty i kwoty na potwierdzeniu się zgadzają
+[ ] Koszyk jest teraz pusty (licznik w nagłówku pokazuje 0)
+[ ] Jeśli spróbujesz wejść na tę samą stronę potwierdzenia w innej
+    przeglądarce/bez historii (np. tryb prywatny) — dostajesz błąd
+    404, a nie cudze zamówienie (to celowe zabezpieczenie)
+[ ] Karta testowa do ODRZUCONEJ płatności: 4000 0000 0000 0002 —
+    powinien pokazać się czytelny komunikat błędu, a nie "biały ekran"
+
+---------------------------------------------------------------------
+PANEL ADMINISTRATORA (Etap 8) — /admin
+---------------------------------------------------------------------
+Żeby przetestować, Twoje konto musi mieć rolę "admin" (patrz plik 03,
+punkt 2 — nadawanie roli w Supabase Table Editor).
+
+[ ] Wejście na /admin zwykłym kontem (rola "customer") przekierowuje
+    na stronę główną — nie da się wejść, nawet wpisując adres ręcznie
+[ ] Zalogowanym adminem: w prawym górnym rogu strony pojawia się link
+    "Admin"
+[ ] Przegląd pokazuje sensowne liczby (przychód, zamówienia, produkty)
+[ ] Produkty: edycja ceny/nazwy zapisuje się i widać ją po odświeżeniu
+[ ] Produkty: zmiana stanu magazynowego wariantu zapisuje się
+    (sprawdź na stronie produktu w sklepie, że dostępność się zmieniła)
+[ ] Zamówienia: zmiana statusu (np. z "Opłacone" na "W przygotowaniu")
+    działa i pokazuje tylko sensowne, kolejne statusy do wyboru
+[ ] Kody rabatowe: dodanie nowego kodu działa i widać go od razu
+    w koszyku/checkoucie sklepu
+[ ] Klienci: lista pokazuje e-mail i liczbę zamówień
+
+---------------------------------------------------------------------
+JEŚLI COŚ NIE DZIAŁA
+---------------------------------------------------------------------
+Nie martw się i nic sam/a nie napraw w kodzie — po prostu opisz mi
+dokładnie:
+1. Co zrobiłeś/aś (jakie kroki, w jakiej kolejności)
+2. Co się stało
+3. Co się MIAŁO stać (Twoim zdaniem)
+
+Zrzut ekranu też pomaga.
