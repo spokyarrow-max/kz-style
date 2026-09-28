@@ -90,9 +90,12 @@ export default async function ProductPage(props: PageProps<"/produkt/[slug]">) {
       </nav>
 
       <div className="mt-8 grid grid-cols-1 gap-12 lg:grid-cols-2">
-        {/* Placeholder galerii zdjęć — do podmiany na prawdziwe fotografie w Storage. */}
-        <div className="flex aspect-[3/4] items-center justify-center border border-stone-800 bg-stone-900">
-          <span className="font-display text-6xl font-black uppercase text-stone-700">KZ</span>
+        <div className="border border-stone-800 bg-stone-900">
+          <img
+            src={`/images/products/${product.slug}.png`}
+            alt={product.name}
+            className="block w-full h-auto"
+          />
         </div>
 
         <div>

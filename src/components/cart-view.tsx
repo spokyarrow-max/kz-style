@@ -36,7 +36,11 @@ function CartRow({ item }: { item: CartItemView }) {
       }`}
     >
       <div className="flex h-24 w-20 shrink-0 items-center justify-center border border-stone-800 bg-stone-900">
-        <span className="font-display text-lg font-black text-stone-700">KZ</span>
+        <img
+          src={`/images/products/${item.product.slug}.png`}
+          alt={item.product.name}
+          className="h-full w-full object-contain"
+        />
       </div>
 
       <div className="flex flex-1 flex-col justify-between">

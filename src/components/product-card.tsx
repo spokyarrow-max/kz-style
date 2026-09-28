@@ -24,11 +24,12 @@ export function ProductCard({
   return (
     <div className="group">
       <Link href={`/produkt/${product.slug}`} className="block">
-        {/* Placeholder zdjęcia — do podmiany na prawdziwe fotografie w Storage. */}
-        <div className="relative flex aspect-[3/4] items-center justify-center overflow-hidden border border-stone-800 bg-stone-900">
-          <span className="font-display text-3xl font-black uppercase tracking-tight text-stone-700 transition-colors group-hover:text-stone-600">
-            KZ
-          </span>
+        <div className="relative border border-stone-800 bg-stone-900">
+          <img
+            src={`/images/products/${product.slug}.png`}
+            alt={product.name}
+            className="block w-full h-auto"
+          />
 
           <div className="absolute left-3 top-3 flex flex-col gap-1.5">
             {product.is_limited_drop && (

@@ -17,5 +17,14 @@ export default async function LimitedDropPage(props: PageProps<"/limited-drop">)
     getFilterFacets({ collection: "limited" }),
   ]);
 
-  return <CatalogGrid title="Limited Drop" products={products} facets={facets} />;
+  return (
+    <>
+      <img
+        src="/images/limited-drop.png"
+        alt="Limited Drop — bluza KZ Style na betonowej kostce"
+        className="block h-auto w-full border-b border-stone-800"
+      />
+      <CatalogGrid title="Limited Drop" products={products} facets={facets} />
+    </>
+  );
 }
